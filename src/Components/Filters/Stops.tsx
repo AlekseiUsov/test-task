@@ -21,7 +21,7 @@ export const Stops: FC<TFilterStops> = memo(({ changeFilters, stops }) => {
     changeFilters(newStops);
   };
 
-  const addNewStops = (value: number, stops: Array<number>) => {
+  const changeStops = (value: number, stops: Array<number>) => {
     const newStops = stops.includes(value)
       ? stops.filter((el) => el !== value)
       : [...stops, value];
@@ -34,7 +34,7 @@ export const Stops: FC<TFilterStops> = memo(({ changeFilters, stops }) => {
       {defaultStops.map((stop) => (
         <Checkbox
           checked={stops.includes(stop.value)}
-          onClick={() => addNewStops(stop.value, stops)}
+          onClick={() => changeStops(stop.value, stops)}
         >
           {stop.text}
           <Button
