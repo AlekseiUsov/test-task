@@ -11,7 +11,8 @@ export const addapterJson = (json: {
   tickets: Array<IJson>;
 }): Array<ITicket> => {
   const { tickets } = json;
-  const result = tickets.map((el) => ({
+  const sortedTickets = tickets.sort((a, b) => a.price - b.price);
+  const result = sortedTickets.map((el) => ({
     ...el,
     key: uniqid(),
     price: formateTicketPrice(el.price, defaultCurrency),

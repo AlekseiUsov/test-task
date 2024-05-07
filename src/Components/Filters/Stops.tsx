@@ -33,6 +33,7 @@ export const Stops: FC<TFilterStops> = memo(({ changeFilters, stops }) => {
       <span className={styles.text}>КОЛИЧЕСТВО ПЕРЕСАДОК</span>
       {defaultStops.map((stop) => (
         <Checkbox
+          key={stop.value}
           checked={stops.includes(stop.value)}
           onClick={() => changeStops(stop.value, stops)}
         >
