@@ -39,7 +39,7 @@ export const TicketsSearch = () => {
 
   useEffect(() => {
     const checkboxesParams = createCheckboxesParams(addaptedJson);
-    if (!stops.length) {
+    if (!stops.length || stops.length === checkboxesParams.length - 1) {
       const defaultStops = checkboxesParams.map((el) => el.value);
       setStops(defaultStops);
     }
