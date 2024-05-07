@@ -8,45 +8,51 @@ import { TFilterStops } from "../../service/types/filter";
 // components
 import { Button, Checkbox } from "antd";
 
-const defaultStops = [
-  { text: "Без пересадок", value: 0 },
-  { text: "1 пересадка", value: 1 },
-  { text: "2 пересадки", value: 2 },
-  { text: "3 пересадки", value: 3 },
-];
+export const Stops: FC<TFilterStops> = memo(
+  ({ changeFilters, checkboxesParams, stops }) => {
+    const filterStops = (value: number | null) => {
+      const newStops =
+        stops.includes(value) && stops.length === 1 ? [] : [value];
+      changeFilters(newStops);
+    };
 
-export const Stops: FC<TFilterStops> = memo(({ changeFilters, stops }) => {
-  const filterStops = (value: number) => {
-    const newStops = stops.includes(value) && stops.length === 1 ? [] : [value];
-    changeFilters(newStops);
-  };
+    const changeStops = (value: number | null, stops: Array<number | null>) => {
+      if (value === null) {
+        const newStops = !stops.includes(value)
+          ? checkboxesParams.map((el) => el.value)
+          : [];
+        changeFilters([...newStops]);
+      } else {
+        const filtredStops = stops.filter((el) => el !== null);
+        const newStops = filtredStops.includes(value)
+          ? filtredStops.filter((el) => el !== value)
+          : [...filtredStops, value];
+        changeFilters(newStops);
+      }
+    };
 
-  const changeStops = (value: number, stops: Array<number>) => {
-    const newStops = stops.includes(value)
-      ? stops.filter((el) => el !== value)
-      : [...stops, value];
-    changeFilters(newStops);
-  };
-
-  return (
-    <>
-      <span className={styles.text}>КОЛИЧЕСТВО ПЕРЕСАДОК</span>
-      {defaultStops.map((stop) => (
-        <Checkbox
-          key={stop.value}
-          checked={stops.includes(stop.value)}
-          onClick={() => changeStops(stop.value, stops)}
-        >
-          {stop.text}
-          <Button
-            onClick={() => filterStops(stop.value)}
-            type="text"
-            className={cn(styles.hidden, styles.button)}
+    return (
+      <>
+        <span className={styles.text}>КОЛИЧЕСТВО ПЕРЕСАДОК</span>
+        {checkboxesParams.map((params, index) => (
+          <Checkbox
+            key={index}
+            checked={stops.includes(params.value)}
+            onClick={() => changeStops(params.value, stops)}
           >
-            ТОЛЬКО
-          </Button>
-        </Checkbox>
-      ))}
-    </>
-  );
-});
+            {params.text}
+            {params.value !== null && (
+              <Button
+                onClick={() => filterStops(params.value)}
+                type="text"
+                className={cn(styles.hidden, styles.button)}
+              >
+                ТОЛЬКО
+              </Button>
+            )}
+          </Checkbox>
+        ))}
+      </>
+    );
+  }
+);

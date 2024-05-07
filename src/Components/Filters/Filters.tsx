@@ -8,11 +8,20 @@ import { IFilter } from "../../service/types/filter";
 import { Currency } from "./Currency";
 import { Stops } from "./Stops";
 
-export const Filters: FC<IFilter> = ({ changeFilters, currency, stops }) => {
+export const Filters: FC<IFilter> = ({
+  changeFilters,
+  currency,
+  checkboxesParams,
+  stops,
+}) => {
   return (
     <div className={styles.filters}>
       <Currency changeFilters={changeFilters} currency={currency} />
-      <Stops changeFilters={changeFilters} stops={stops} />
+      <Stops
+        changeFilters={changeFilters}
+        checkboxesParams={checkboxesParams}
+        stops={stops}
+      />
     </div>
   );
 };
