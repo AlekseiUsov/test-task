@@ -39,7 +39,6 @@ export const TicketsSearch = () => {
 
   useEffect(() => {
     const checkboxesParams = createCheckboxesParams(addaptedJson);
-
     if (!stops.length) {
       const defaultStops = checkboxesParams.map((el) => el.value);
       setStops(defaultStops);
@@ -49,7 +48,6 @@ export const TicketsSearch = () => {
         ? changeTicketsPriceByCurrency(addaptedJson, currency)
         : addaptedJson;
     const filteredTickets = filterTickets(tickets, stops);
-
     setCheckboxesParams(checkboxesParams);
     setTickets(filteredTickets);
   }, [stops, currency, addaptedJson]);
