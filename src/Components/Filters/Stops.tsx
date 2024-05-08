@@ -18,9 +18,7 @@ export const Stops: FC<TFilterStops> = memo(
 
     const changeStops = (value: number | null, stops: Array<number | null>) => {
       if (value === null) {
-        const newStops = !stops.includes(value)
-          ? checkboxesParams.map((el) => el.value)
-          : [];
+        const newStops = checkboxesParams.map((el) => el.value);
         changeFilters([...newStops]);
       } else {
         const filtredStops = stops.filter((el) => el !== null);
