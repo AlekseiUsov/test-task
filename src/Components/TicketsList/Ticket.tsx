@@ -10,7 +10,7 @@ import { adapterDate } from "../../service/utils/adapterDate";
 import { adapterStops } from "../../service/utils/adapterStops";
 // components
 import { Button } from "antd";
-import { Aeroflot, AirplaneIcon } from "../../static/images/svg/Icons";
+import { Aeroflot, AirplaneIcon } from "../../assets/images/svg/Icons";
 
 interface IProps {
   ticket: ITicket;
